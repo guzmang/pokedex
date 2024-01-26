@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import './index.css'
+import './styles.css'
 import { PokemonRouter } from './routes';
 
 import { store } from './store';
