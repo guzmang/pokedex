@@ -22,8 +22,11 @@ export const PokemonApp = () => {
 
         <ul>
           {
-            pokemons.map( ({ name }) => (
-              <li key={ name }>{ name }</li>
+            pokemons.map( ({ name, sprites }) => (
+              <>
+                <li key={ name }>{ name }</li>
+                <img src={ sprites.front_default} alt={`${name} - Front`} />
+              </>
             ))
           }
         </ul>
