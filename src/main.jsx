@@ -1,15 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
 import './index.css'
-import { PokemonApp } from './PokemonApp';
+import { PokemonRouter } from './routes';
 
 import { store } from './store';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={ store }>
-      <PokemonApp />
+      <BrowserRouter>
+        <PokemonRouter />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 )

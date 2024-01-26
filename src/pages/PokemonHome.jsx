@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPokemons } from './store/slices/pokemon';
+import { getPokemons } from '../store/slices/pokemon';
 
-
-export const PokemonApp = () => {
+export const PokemonHome = () => {
 
   const dispatch = useDispatch();
   const { isLoading, pokemons = [], page } = useSelector( state => state.pokemons );
