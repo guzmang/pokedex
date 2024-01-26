@@ -30,12 +30,25 @@ export const PokemonHome = () => {
           }
         </ul>
 
-        <button
-          disabled={ isLoading }
-          onClick={ () => dispatch( getPokemons(page) ) }
-        >
-          Next
-        </button>
+        { page == 0 ?
+          null :
+          <button
+            disabled={ isLoading }
+            onClick={ () => dispatch( getPokemons(page - 1) ) }
+          >
+            Previous
+          </button>
+        }
+
+        { page == 130 ?
+          null :
+          <button
+            disabled={ isLoading }
+            onClick={ () => dispatch( getPokemons(page + 1) ) }
+          >
+            Next
+          </button>
+        }
     </>
   )
 }
