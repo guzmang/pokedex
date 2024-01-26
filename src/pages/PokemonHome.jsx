@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPokemons } from '../store/slices/pokemon';
+import { PokemonList } from '../pokemons';
 
 export const PokemonHome = () => {
 
@@ -15,16 +16,7 @@ export const PokemonHome = () => {
 
   return (
     <>
-        <ul>
-          {
-            pokemons.map( ({ name, sprites }) => (
-              <>
-                <li key={ name }>{ name }</li>
-                <img src={ sprites.front_default} alt={`${name} - Front`} />
-              </>
-            ))
-          }
-        </ul>
+        <PokemonList pokemons={ pokemons }/>
 
         { page == 0 ?
           null :
