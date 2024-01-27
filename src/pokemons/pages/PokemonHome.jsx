@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPokemons } from '../store/slices/pokemon';
-import { PokemonList } from '../pokemons';
+import { getPokemons } from '../../store/slices/pokemon';
+import { PokemonList } from '../components';
 
 export const PokemonHome = () => {
 

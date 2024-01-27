@@ -1,15 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
-
-import { PokemonHome } from '../pages';
-import { Navbar } from '../ui';
+import { PokemonHome, PokemonPage } from '../pages';
 
 export const PokemonRouter = () => {
   return (
     <>
-        <Navbar />
         <div className="container">
             <Routes>
-                <Route path="/*" element={ <PokemonHome />} />
+                <Route path="pokemon/:id" element={<PokemonPage />} />
+                <Route path="/" element={ <PokemonHome />} />
             </Routes>
         </div>
     </>

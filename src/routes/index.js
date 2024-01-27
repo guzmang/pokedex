@@ -1,1 +1,1 @@
-export * from './PokemonRouter';
+export * from './AppRouter';

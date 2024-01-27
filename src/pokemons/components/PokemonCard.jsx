@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
 export const PokemonCard = ({ 
+    id,
     name,
     sprites,
     stats,
@@ -38,8 +39,12 @@ export const PokemonCard = ({
                                     <p className="card-text" key = { slot }>
                                         { type.name }
                                     </p>
-                                ))   
+                                ))
                             }
+
+                            <Link to={`/pokemon/${ id }`}>
+                                More...
+                            </Link>
                         </div>
 
                     </div>

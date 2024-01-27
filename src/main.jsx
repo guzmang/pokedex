@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import './styles.css'
-import { PokemonRouter } from './routes';
+import { AppRouter } from './routes';
 
 import { store } from './store';
 
@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={ store }>
       <BrowserRouter>
-        <PokemonRouter />
+        <AppRouter />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
