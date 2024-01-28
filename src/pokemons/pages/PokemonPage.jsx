@@ -26,7 +26,6 @@ export const PokemonPage = () => {
       }
     };
     getPokemon();
-    console.log("pok", pokemon);
   }, []);
 
   if (loading) {
