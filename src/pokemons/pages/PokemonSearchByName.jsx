@@ -77,13 +77,24 @@ export const PokemonSearchByName = () => {
             </div>
 
             <div className="col-7">
-                <h4>Results</h4>
+                <h4>Result</h4>
                 <hr />
                 
                 <div className="alert alert-primary animate__animated animate__fadeIn" 
                     style={{ display: showSearch ? '' : 'none' }}>
-                Search a Pokemon
+                    Search a Pokemon
                 </div>
+
+                {
+                    pokemon && <PokemonCard 
+                                    key = { pokemon.id }
+                                    id = { pokemon.id }
+                                    name = { pokemon.name }
+                                    sprites = { pokemon.sprites }
+                                    stats = { pokemon.stats }
+                                    types = { pokemon.types }
+                                />
+                }
 
             </div>
         </div>
