@@ -66,7 +66,10 @@ export const PokemonSearchByType = () => {
             {
                 pokemons.map( ({ pokemon }, index) => (
                     <li className="list-group-item" key = { pokemon.name }>
-                        <b>{ index + 1 }:</b> { pokemon.name }
+                        <b>{ index + 1 }:</b> { pokemon.name } { " - " }
+                        <Link to={`/pokemon/${ pokemon.url.match(/\/(\d+)\/$/)[1] }`}>
+                            More...
+                        </Link>
                     </li>
                 ))   
             }
