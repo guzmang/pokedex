@@ -12,8 +12,8 @@ export const PokemonSearchByType = () => {
     useEffect(() => {
         const getTypes = async() => {
         try {
-            const { data } = await axios.get(`https://pokeapi.co/api/v2/type`);
-            setTypes([ ...types, ...data.results]);
+            const { data } = await axios.get(`http://localhost:3000/api/types`);
+            setTypes([ ...types, ...data]);
             setLoading(false);
         } catch (error) {
             console.error('Error getting types:', error);

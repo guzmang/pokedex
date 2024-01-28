@@ -8,7 +8,7 @@ export const getPokemons = ( page = 0 ) => {
     return async( dispatch, getState ) => {
         dispatch( startLoadingPokemons() );
 
-        const { data } = await axios.get(`http://localhost:3000/api/${page}`);
+        const { data } = await axios.get(`http://localhost:3000/api/page/${page}`);
         dispatch( setPokemons({ pokemons: data, page }) );
     }
 }
