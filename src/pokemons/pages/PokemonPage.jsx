@@ -74,14 +74,17 @@ export const PokemonPage = () => {
         </ul>
 
         <h5 className="mt-3"> Moves </h5>
+        <div>
         {
-            pokemon.moves.map( ({ move }) => (
-                <li className="list-group-item" key = { move.name }>
-                    <b>{ move.name } </b>
-                </li>
-            ))   
+            pokemon.moves.map( ({ move }, index) => (
+                <span key={ move.name }>
+                    { move.name }
+                    { index < pokemon.moves.length - 1 && " - " }
+                </span>
+            ))
         }
-
+        </div>
+        <br/>
         <button 
           className="btn btn-outline-primary"
           onClick={ onNavigateBack }
