@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { pokemonApi } from '../../api/pokemonApi';
 
 export const PokemonPage = () => {
 
@@ -13,23 +13,40 @@ export const PokemonPage = () => {
 
     const [pokemon, setPokemon] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
         const getPokemon = async() => {
             try {
-                const { data } = await axios.get(`http://localhost:3000/api/name/${id}`);
+                const { data } = await pokemonApi.get(`/name/${id}`);
                 setPokemon(data);
                 setLoading(false);
+                setNotFound(false);
             } catch (error) {
                 console.error('Error getting pokemon:', error);
                 setLoading(false);
+                setNotFound(true);
             }
         };
         getPokemon();
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <h1>Loading...</h1>;
+    }
+
+    if (notFound) {
+        return (
+            <>
+                <h1>Pokemon Not Found</h1>
+                <button 
+                    className="btn btn-outline-primary"
+                    onClick={ onNavigateBack }
+                >
+                    Back
+                </button>
+            </>
+        )
     }
 
     return (

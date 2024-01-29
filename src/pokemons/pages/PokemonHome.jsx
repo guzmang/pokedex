@@ -10,7 +10,7 @@ export const PokemonHome = () => {
 
 
   useEffect(() => {
-    dispatch( getPokemons() );    
+    dispatch( getPokemons(page) );    
   }, [])
   
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { pokemonApi } from '../../api/pokemonApi';
 
 export const PokemonSearchByType = () => {
 
@@ -12,7 +12,7 @@ export const PokemonSearchByType = () => {
     useEffect(() => {
         const getTypes = async() => {
         try {
-            const { data } = await axios.get(`http://localhost:3000/api/types`);
+            const { data } = await pokemonApi.get(`/types`);
             setTypes([ ...types, ...data]);
             setLoading(false);
         } catch (error) {
@@ -31,7 +31,7 @@ export const PokemonSearchByType = () => {
 
         const getPokemons = async() => {
             try {
-                const { data } = await axios.get(`http://localhost:3000/api/type/${option}`);
+                const { data } = await pokemonApi.get(`/type/${option}`);
                 setPokemons(data);
                 setLoading(false);
             } catch (error) {

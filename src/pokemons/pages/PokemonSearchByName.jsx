@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string'
-import axios from 'axios';
 
 import { useForm } from '../../hooks/useForm';
 import { PokemonCard } from '../components';
+import { pokemonApi } from '../../api/pokemonApi';
 
 export const PokemonSearchByName = () => {
 
@@ -27,7 +27,7 @@ export const PokemonSearchByName = () => {
         if (q) {
             const getPokemon = async() => {
                 try {
-                const { data } = await axios.get(`http://localhost:3000/api/name/${q}`);
+                const { data } = await pokemonApi.get(`/name/${q}`);
                 setPokemon(data);
                 setLoading(false);
                 } catch (error) {
