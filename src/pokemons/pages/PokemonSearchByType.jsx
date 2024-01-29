@@ -1,27 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { pokemonApi } from '../../api/pokemonApi';
+import { useGetPokemonTypesQuery } from '../../store/apis';
 
 export const PokemonSearchByType = () => {
 
-    const [types, setTypes] = useState([{'name': '-'}]);
+    const { data: resultsTypes, isLoading: loading } = useGetPokemonTypesQuery();
+
     const [option, setOption] = useState('-');
     const [pokemons, setPokemons] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const getTypes = async() => {
-        try {
-            const { data } = await pokemonApi.get(`/types`);
-            setTypes([ ...types, ...data]);
-            setLoading(false);
-        } catch (error) {
-            console.error('Error getting types:', error);
-            setLoading(false);
-        }
-        };
-        getTypes();
-    }, []);
 
     useEffect(() => {
         if(option == '-') {
@@ -33,23 +20,23 @@ export const PokemonSearchByType = () => {
             try {
                 const { data } = await pokemonApi.get(`/type/${option}`);
                 setPokemons(data);
-                setLoading(false);
             } catch (error) {
-                console.error('Error getting types:', error);
-                setLoading(false);
+                console.error('Error getting pokemons with choosen type:', error);
             }
             };
         getPokemons();
     }, [option]);
 
-    const onHandleChange = (e) => {
-        setOption(e.target.value)
-    };
-
     if (loading) {
         return <div>Loading...</div>;
     }
 
+    const types = [{'name': '-'}, ...resultsTypes];
+
+    const onHandleChange = (e) => {
+        setOption(e.target.value)
+    };
+    
     return (
         <>
             <div>
