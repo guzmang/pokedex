@@ -5,11 +5,15 @@ export const pokemonSlice = createSlice({
     initialState: {
         page: 0,
         pokemons: [],
+        dark: false,
         isLoading: false,
     },
     reducers: {
         startLoadingPokemons: (state, /* action */ ) => {
             state.isLoading = true;
+        },
+        setDarkMode: ( state ) => {
+            state.dark = !state.dark;
         },
         setPokemons: ( state, action ) => {
             state.isLoading = false;
@@ -21,4 +25,4 @@ export const pokemonSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { startLoadingPokemons, setPokemons } = pokemonSlice.actions;
+export const { startLoadingPokemons, setDarkMode, setPokemons } = pokemonSlice.actions;

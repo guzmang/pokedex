@@ -1,0 +1,19 @@
+:root {
+    --color-fondo: #ffffff; /* Color de fondo predeterminado */
+    --color-texto: #000000; /* Color de texto predeterminado */
+}
+
+.dark-mode {
+    --color-fondo: #333333; /* Color de fondo para el modo nocturno */
+    --color-texto: #ffffff; /* Color de texto para el modo nocturno */
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+body .card {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
