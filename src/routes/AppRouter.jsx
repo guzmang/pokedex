@@ -1,23 +1,23 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { PokemonHome } from '../pokemons/pages';
+import { LoginPage } from '../auth/pages';
 import { PokemonRouter } from '../pokemons/routes';
-
-import { Navbar } from '../ui/components';
 
 export const AppRouter = () => {
 
-  const darkMode = useSelector(state => state.pokemons.dark);
+  const status = useSelector( state => state.auth.status );
 
   return (
-    <>
-        <Navbar />
-        <div className="container">
-            <Routes>
-                <Route path="/" element={ <PokemonHome />} />
-                <Route path="/*" element={ <PokemonRouter />} />
-            </Routes>
-        </div>
-    </>
+
+    <Routes>
+      {
+          (status === 'authenticated')
+           ? <Route path="/*" element={ <PokemonRouter /> } />
+           : <Route path="/login" element={ <LoginPage /> } />
+      }
+
+      <Route path="/*" element={ <Navigate to="/login" /> } />
+    </Routes>
+
   )
 }
