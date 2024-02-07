@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string'
 
@@ -8,6 +9,7 @@ import { pokemonApi } from '../../api/pokemonApi';
 
 export const PokemonSearchByName = () => {
 
+    const { token } = useSelector( state => state.auth );
     const navigate = useNavigate();
     const location = useLocation();
   
@@ -28,7 +30,11 @@ export const PokemonSearchByName = () => {
         if (q) {
             const getPokemon = async() => {
                 try {
-                    const { data } = await pokemonApi.get(`/name/${q}`);
+                    const { data } = await pokemonApi.get(`/name/${q}`, {
+                        headers: {
+                            'x-token': token
+                        }
+                    });
                     setPokemon(data);
                     setLoading(false);
                 } catch (error) {

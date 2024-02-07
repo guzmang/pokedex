@@ -1,17 +1,20 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/slices/auth';
+import { useGetTokenMutation } from '../../store/apis/pokemonApi';
 
 export const LoginPage = () => {
 
+    const [getToken, { isLoading, isError, data }] = useGetTokenMutation();
     const darkMode = useSelector(state => state.pokemons.dark);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const onLogin = () => {
+    const onLogin = async() => {
         if(darkMode)
             document.body.classList.toggle('dark-mode');
-        dispatch( login() );
+        const { data } = await getToken();
+        dispatch( login(data.token) );
         navigate('/', {
            replace: true    // this property is to avoid access to previous page if you loggin or loggout
         });

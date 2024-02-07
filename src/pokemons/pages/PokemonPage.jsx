@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { pokemonApi } from '../../api/pokemonApi';
 
 export const PokemonPage = () => {
 
     const { id } = useParams();
     const navigate = useNavigate();
-
-    const onNavigateBack = () => {
-        navigate(-1);
-    }
+    const { token } = useSelector( state => state.auth );
 
     const [pokemon, setPokemon] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -18,7 +16,11 @@ export const PokemonPage = () => {
     useEffect(() => {
         const getPokemon = async() => {
             try {
-                const { data } = await pokemonApi.get(`/name/${id}`);
+                const { data } = await pokemonApi.get(`/name/${id}`, {
+                    headers: {
+                        'x-token': token
+                    }
+                });
                 setPokemon(data);
                 setLoading(false);
                 setNotFound(false);
@@ -30,6 +32,10 @@ export const PokemonPage = () => {
         };
         getPokemon();
     }, []);
+
+    const onNavigateBack = () => {
+        navigate(-1);
+    }
 
     if (loading) {
         return <h1>Loading...</h1>;

@@ -6,11 +6,11 @@ import { PokemonList } from '../components';
 export const PokemonHome = () => {
 
   const dispatch = useDispatch();
+  const { token } = useSelector( state => state.auth );
   const { isLoading, pokemons = [], page } = useSelector( state => state.pokemons );
 
-
   useEffect(() => {
-    dispatch( getPokemons(page) );    
+    dispatch( getPokemons(token, page) );    
   }, [])
   
 
@@ -28,7 +28,7 @@ export const PokemonHome = () => {
               className="btn btn-outline-primary mr-2"
               style={{ marginRight: '20px' }}
               disabled={ isLoading }
-              onClick={ () => dispatch( getPokemons(page - 1) ) }
+              onClick={ () => dispatch( getPokemons(token, page - 1) ) }
             >
               Previous
             </button>
@@ -39,7 +39,7 @@ export const PokemonHome = () => {
             <button
             className="btn btn-outline-primary"
               disabled={ isLoading }
-              onClick={ () => dispatch( getPokemons(page + 1) ) }
+              onClick={ () => dispatch( getPokemons(token, page + 1) ) }
             >
               Next
             </button>

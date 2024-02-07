@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { pokemonApi } from '../../api/pokemonApi';
 import { useGetPokemonTypesQuery } from '../../store/apis';
@@ -6,6 +7,7 @@ import { useGetPokemonTypesQuery } from '../../store/apis';
 export const PokemonSearchByType = () => {
 
     const { data: resultsTypes, isLoading: loading } = useGetPokemonTypesQuery();
+    const { token } = useSelector( state => state.auth );
 
     const [option, setOption] = useState('-');
     const [pokemons, setPokemons] = useState([]);
@@ -18,7 +20,11 @@ export const PokemonSearchByType = () => {
 
         const getPokemons = async() => {
             try {
-                const { data } = await pokemonApi.get(`/type/${option}`);
+                const { data } = await pokemonApi.get(`/type/${option}`, {
+                    headers: {
+                        'x-token': token
+                    }
+                });
                 setPokemons(data);
             } catch (error) {
                 console.error('Error getting pokemons with choosen type:', error);
